@@ -1,0 +1,3 @@
+scalaVersion := "2.10.3"
+
+addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.5.2")

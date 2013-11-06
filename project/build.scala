@@ -10,13 +10,14 @@ object Fort extends Build {
     scalacOptions ++= Seq(
       "-unchecked", "-deprecation", "-Yinline-warnings", "-Xcheckinit", "-encoding", "utf8",
       "-feature", "-language:higherKinds", "-language:postfixOps", "-language:implicitConversions",
-      "-language:reflectiveCalls", "-language:existentials"
+      "-language:reflectiveCalls", "-language:existentials", "-Yrangepos"
     ),
     javacOptions ++= Seq("-target", "1.6", "-source", "1.6", "-Xlint:deprecation"),
     libraryDependencies <++= scalaVersion(sv=>Seq(
       "org.scala-lang" % "scala-library" % sv,
       "org.scala-lang" % "scala-reflect" % sv,
-      "org.scala-lang" % "scala-compiler" % sv)),
+      "org.scala-lang" % "scala-compiler" % sv,
+      "org.specs2" %% "specs2" % "2.3.1" % "test")),
     resolvers ++= Seq(Opts.resolver.sonatypeSnapshots, Opts.resolver.sonatypeReleases)
   )
 
@@ -25,12 +26,6 @@ object Fort extends Build {
     base = file("."),
     settings = fortSettings ++ Seq(
       description := "An inversion of control container for Scala."
-    ) ++ Seq(
-      libraryDependencies <++= scalaVersion(sv=>Seq(
-        "org.scala-lang" % "scala-library" % sv,
-        "org.scala-lang" % "scala-reflect" % sv,
-        "org.scala-lang" % "scala-compiler" % sv)
-      )
     ),
     aggregate = Seq(core)
   )
@@ -38,12 +33,7 @@ object Fort extends Build {
   lazy val core = Project(
     id = "core",
     base = file("core"),
-    settings = fortSettings  ++ Seq(
-      libraryDependencies <++= scalaVersion(sv=>Seq(
-        "org.scala-lang" % "scala-library" % sv,
-        "org.scala-lang" % "scala-reflect" % sv,
-        "org.scala-lang" % "scala-compiler" % sv))
-    )
+    settings = fortSettings
   )
 
   /*

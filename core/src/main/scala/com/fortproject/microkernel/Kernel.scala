@@ -11,9 +11,6 @@ trait Kernel extends KernelEvents {
   def graphNodes: Array[GraphNode];
   def handlerFactory: HandlerFactory;
   def parent: Kernel;
-  def proxyFactory: ProxyFactory;
-  def releasePolicy: ReleasePolicy;
-  def resolver: DependencyResolver;
   def addChildKernel(kernel: Kernel);
   def addFacility(facility: Facility);
   def addFacility[T <: Facility](): Kernel;
